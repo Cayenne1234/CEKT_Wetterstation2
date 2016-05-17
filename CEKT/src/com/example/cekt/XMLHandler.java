@@ -26,15 +26,15 @@ public class XMLHandler extends DefaultHandler{
 				} catch (ParseException e) {
 					e.printStackTrace();
 				}
-				System.out.println(date);
+				//System.out.println(date);
 			} else if (qName.equalsIgnoreCase("temp")) btemp = true;
 			else if(qName.equalsIgnoreCase("pressure")) bpressure = true;
 	}
 	
 	@Override
 	public void endElement (String uri, String localName, String qName) throws SAXException {
-		   if(qName.equalsIgnoreCase("weatherdata"))
-			   System.out.println("End Element: "+qName);
+		   if(qName.equalsIgnoreCase("weatherdata")){}
+			 // System.out.println("End Element: "+qName);
 	   }
 	   
 	 
@@ -42,13 +42,13 @@ public class XMLHandler extends DefaultHandler{
 	   public void characters(char ch[], 
 	      int start, int length) throws SAXException {
 	      if (btemp) {
-	         System.out.println("Temperatur: " 
-	         + new String(ch, start, length));
+	      //   System.out.println("Temperatur: "
+	        // + new String(ch, start, length));
 	         temp = new String(ch, start, length);
 	         btemp = false;
 	      } else if (bpressure) {
-	         System.out.println("Pressure: " 
-	         + new String(ch, start, length));
+	        // System.out.println("Pressure: "
+	        // + new String(ch, start, length));
 	         pressure =  new String(ch, start, length);
 	         bpressure = false;
 	      }
