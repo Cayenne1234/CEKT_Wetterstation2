@@ -42,7 +42,8 @@
     android:layout_alignParentLeft="true"
     android:layout_alignParentRight="true"
     android:text="refresh data"
-    />
+            android:textColor="#fc3030"
+            android:textSize="18dp" />
 
 
     </LinearLayout>
