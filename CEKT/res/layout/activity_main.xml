@@ -11,27 +11,20 @@
             android:id="@+id/bigLL"
             android:layout_width="fill_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical" >
-            
-            <Button
-        android:id="@+id/refreshBtn"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:text="refresh data"
-        />
-            
-                <ScrollView
+            android:orientation="vertical"
+        android:weightSum="1">
+
+        <ScrollView
         android:id="@+id/scrollView1"
         android:layout_width="fill_parent"
-        android:layout_height="match_parent"
+        android:layout_height="400dp"
         android:layout_above="@+id/addCategoryButon"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:scrollbars="horizontal" >
+        android:scrollbars="horizontal"
+            android:layout_weight="0.71"
+            android:fillViewport="false">
 
         <LinearLayout
             android:id="@+id/linLayout"
@@ -40,9 +33,18 @@
             android:orientation="vertical" >
         </LinearLayout>
     </ScrollView>
-            
-            
-            
+
+        <Button
+    android:id="@+id/refreshBtn"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentRight="true"
+    android:text="refresh data"
+    />
+
+
     </LinearLayout>
     
 
