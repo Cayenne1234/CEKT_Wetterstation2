@@ -21,6 +21,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.util.Log;
 import android.util.Xml;
 import android.view.Menu;
 import android.view.MenuItem;

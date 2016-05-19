@@ -16,13 +16,14 @@ import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 
 import android.os.AsyncTask;
+import android.util.Log;
 import android.widget.Toast;
 
 public class AsyncConnection extends AsyncTask<String, Void, InputStream> {
 	
 	    public Exception exception;
 	    
-	    private XMLHandler handler;
+	    private XMLHandler handler =null;
 
 		private MainActivity ma;
 	    
@@ -42,7 +43,7 @@ public class AsyncConnection extends AsyncTask<String, Void, InputStream> {
 		    	SAXParser saxparser = factory.newSAXParser();
 		    	handler = new XMLHandler();
 		    	saxparser.parse(in, handler);
-		    	
+
 
 
 	        } catch (Exception e) {
@@ -53,10 +54,11 @@ public class AsyncConnection extends AsyncTask<String, Void, InputStream> {
 	    }
 
 	    protected void onPostExecute(InputStream result) {
-	    	ma.tempTxt.setText("Temperature: "+handler.getTemp()+" °C");
-	    	ma.barTxt.setText("Air-Pressure: "+handler.getPressure()+" hPa \n");
-	    	ma.dateTxt.setText("Date of this update:\n"+handler.getDate().toString());
-	    	//ma.updateView();
+                ma.tempTxt.setText("Temperature: " + handler.getTemp() + " °C");
+                ma.barTxt.setText("Air-Pressure: " + handler.getPressure() + " hPa \n");
+                ma.dateTxt.setText("Date of this update:\n" + handler.getDate().toString());
+                //ma.updateView();
+
 	    }
 
 }

@@ -19,6 +19,11 @@ public class Parser {
 		System.out.println(handler.getDate());
 		System.out.println(handler.getPressure());
 		System.out.println(handler.getTemp());
+			System.out.println(handler.getHumidity());
+			System.out.println(handler.getDateList());
+			System.out.println(handler.getPressureList());
+			System.out.println(handler.getTempList());
+			System.out.println(handler.getHumidityList());
 		
 		}catch(Exception e){
 			e.printStackTrace();
