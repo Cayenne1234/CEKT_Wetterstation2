@@ -85,6 +85,7 @@ public class XMLHandler extends DefaultHandler{
     public String getHumidity() {return humidity;}
 
 	public String getPressure() {
+		if(pressure==null)pressure = "null";
 		return pressure;
 	}
 
