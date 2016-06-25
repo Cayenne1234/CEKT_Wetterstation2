@@ -17,7 +17,9 @@ public class XMLHandler extends DefaultHandler{
 	Date date = new Date();
 	String temp, pressure, humidity;
 	boolean btemp, bpressure, bhumidity = false;
-	LinkedList<String> tempList, pressureList, humidityList = new LinkedList<String>();
+	LinkedList<String> tempList = new LinkedList<String>();
+	LinkedList<String pressureList = new LinkedList<String>();
+	LinkedList<String> humidityList = new LinkedList<String>();
 	LinkedList<Date> dateList = new LinkedList<Date>();
 	
 	@Override
