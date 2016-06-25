@@ -101,7 +101,7 @@ public class XMLHandler extends DefaultHandler{
     
     public String getAllStuff(){
     	String ret = "";
-    	for(int i = 0; i<=dateList.size()&&i<=tempList.size()&&i<=pressureList.size()&&i<=humidityList.size(); i++){
+    	for(int i = 0; i<=dateList.size()&&i<tempList.size()&&i<pressureList.size()&&i<humidityList.size(); i++){
     		ret +=  "Date: "+dateList.get(i).toString()+"\n"+
     				"Temperature: "+tempList.get(i).toString()+"°C\n"+
     				"Druck: "+pressureList.get(i).toString()+"hPa (10e-3 bar)\n"+
