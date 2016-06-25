@@ -32,10 +32,9 @@ public class AsyncConnection extends AsyncTask<String, Void, InputStream> {
 
 		private MainActivity ma;
 		
-		String text ="";
-		
 		Element data;
-	    
+		
+		org.w3c.dom.Document doc = null;
 	    
 	    public AsyncConnection(MainActivity activity){
 	    	this.ma = activity;
@@ -51,30 +50,17 @@ public class AsyncConnection extends AsyncTask<String, Void, InputStream> {
 		    	in = urlConnection.getInputStream();
 		    	DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		    	DocumentBuilder builder = factory.newDocumentBuilder();
-		    	org.w3c.dom.Document doc = builder.parse(in);
+		    	doc = builder.parse(in);
 		    	// get the first element
 		         data = doc.getDocumentElement();
-		   
-	        	 text = text+data.getFirstChild().toString();
-	        	 
+	        	  
 		         // get all child nodes
 		         NodeList nodes = data.getChildNodes();
-		         
-		         
-		         // print the text content of each child
-		         for (int i = 0; i < nodes.getLength(); i++) {
-		        	 
-
-		            text = text+nodes.item(i).getTextContent()+"\n";
-		         } 
-		         
 
 		    	SAXParserFactory factory2 = SAXParserFactory.newInstance();
 		    	SAXParser saxparser = factory2.newSAXParser();
 		    	handler = new XMLHandler();
 		    	saxparser.parse(in, handler);
-
-
 
 	        } catch (Exception e) {
 	            this.exception = e;
@@ -96,37 +82,34 @@ public class AsyncConnection extends AsyncTask<String, Void, InputStream> {
 	    	try {    
 	    		String oldTemp = "";
 	    		for(int i=1; i<=data.getElementsByTagName("temp").getLength();i++){
-	    			oldTemp += data.getElementsByTagName("temp").item(0).getTextContent()+"; ";
+	    			oldTemp += doc.getFirstChild().getChildNodes().item(i).getChildNodes().item(0).getTextContent()+"; ";
 	              }
-	    		ma.tempTxt.setText(text);
-               ma.tempTxt.setText("Temperature: " + data.getElementsByTagName("temp").item(0).getTextContent() + " °C"+"\n"+"old Values"+oldTemp);
+               ma.tempTxt.setText("Temperature: " + data.getElementsByTagName("temp").item(0).getTextContent() + " °C"+"\n"+"old Values: "+oldTemp);
                String bar = data.getElementsByTagName("pressure").item(0).getTextContent();
                String oldbar = "";
-               for(int i=1; i<=data.getElementsByTagName("pressure").getLength();i++){
-            	   oldbar += data.getElementsByTagName("pressure").item(0).getTextContent()+"; ";
+               for(int i=1; i<data.getElementsByTagName("pressure").getLength();i++){
+            	   oldbar += doc.getDocumentElement().getElementsByTagName("pressure").item(i).getTextContent()+"; ";
                }
                String humid = data.getElementsByTagName("humidity").item(0).getTextContent();
                String oldHumid = "";
-               for(int i=1; i<=data.getElementsByTagName("humidity").getLength();i++){
-            	   oldHumid += data.getElementsByTagName("humidity").item(0).getTextContent()+"; ";
+               for(int i=1; i<data.getElementsByTagName("humidity").getLength();i++){
+            	   oldHumid += doc.getDocumentElement().getElementsByTagName("humidity").item(i).getTextContent()+"; ";
+            	   
                }
                // ma.barTxt.setText("Air-Pressure: " + data.getChildNodes().item(1).getTextContent() + " hPa \n");
                ma.barTxt.setText("Air-Pressure: " + bar + " hPa \n"+"old Values: "+oldbar+
                				"\nHumidity: "+humid+" %\n"+"oldValues: "+oldHumid);
           
                 ma.dateTxt.setText("Date of this update: " + handler.getDate().toString()+"\n");
-                
-                
+ 
               
 			} catch (Exception e) {
 				// TODO: handle exception
 			}
-	    	try {
-	    		ma.tempTxt.setText(handler.getAllStuff());
-			} catch (Exception e) {
-				// TODO: handle exception
-			}
-	    	
+	    
+	    	//	ma.tempTxt.setText(handler.getAllStuff()); //haut keinen Error raus, löscht aber den Text
+	    	//	ma.tempTxt.setTag("asdfasdf"); //macht er komischerweise nicht
+ 
 	    }
 
 }

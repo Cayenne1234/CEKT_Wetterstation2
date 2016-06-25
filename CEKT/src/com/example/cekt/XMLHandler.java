@@ -106,7 +106,7 @@ public class XMLHandler extends DefaultHandler{
     				"Temperature: "+tempList.get(i).toString()+"°C\n"+
     				"Druck: "+pressureList.get(i).toString()+"hPa (10e-3 bar)\n"+
     				"Feuchtigkeit: "+humidityList.get(i).toString()+"\n"+
-    				"-----------------------------------------------------";
+    				"-----------------------------------------------------\n";
     	}
     	return ret;
     }
