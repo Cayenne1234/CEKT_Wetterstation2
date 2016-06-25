@@ -105,14 +105,28 @@ public class AsyncConnection extends AsyncTask<String, Void, InputStream> {
                for(int i=1; i<=data.getElementsByTagName("pressure").getLength();i++){
             	   oldbar += data.getElementsByTagName("pressure").item(0).getTextContent()+"; ";
                }
+               String humid = data.getElementsByTagName("humidity").item(0).getTextContent();
+               String oldHumid = "";
+               for(int i=1; i<=data.getElementsByTagName("humidity").getLength();i++){
+            	   oldHumid += data.getElementsByTagName("humidity").item(0).getTextContent()+"; ";
+               }
                // ma.barTxt.setText("Air-Pressure: " + data.getChildNodes().item(1).getTextContent() + " hPa \n");
-               ma.barTxt.setText("Air-Pressure: " + bar + " hPa \n"+
-            		   	"old Values: "+oldbar);
-                ma.dateTxt.setText("Date of this update:\n" + handler.getDate().toString());
+               ma.barTxt.setText("Air-Pressure: " + bar + " hPa \n"+"old Values: "+oldbar+
+               				"\nHumidity: "+humid+" %\n"+"oldValues: "+oldHumid);
+          
+                ma.dateTxt.setText("Date of this update: " + handler.getDate().toString()+"\n");
+                
+                
               
 			} catch (Exception e) {
 				// TODO: handle exception
 			}
+	    	try {
+	    		ma.tempTxt.setText(handler.getAllStuff());
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+	    	
 	    }
 
 }

@@ -18,7 +18,7 @@ public class XMLHandler extends DefaultHandler{
 	String temp, pressure, humidity;
 	boolean btemp, bpressure, bhumidity = false;
 	LinkedList<String> tempList = new LinkedList<String>();
-	LinkedList<String pressureList = new LinkedList<String>();
+	LinkedList<String> pressureList = new LinkedList<String>();
 	LinkedList<String> humidityList = new LinkedList<String>();
 	LinkedList<Date> dateList = new LinkedList<Date>();
 	
@@ -98,4 +98,17 @@ public class XMLHandler extends DefaultHandler{
 	public LinkedList<String> getPressureList() {return pressureList;}
 
     public LinkedList<String> getHumidityList(){return humidityList;}
+    
+    public String getAllStuff(){
+    	String ret = "";
+    	for(int i = 0; i<=dateList.size()&&i<=tempList.size()&&i<=pressureList.size()&&i<=humidityList.size(); i++){
+    		ret +=  "Date: "+dateList.get(i).toString()+"\n"+
+    				"Temperature: "+tempList.get(i).toString()+"°C\n"+
+    				"Druck: "+pressureList.get(i).toString()+"hPa (10e-3 bar)\n"+
+    				"Feuchtigkeit: "+humidityList.get(i).toString()+"\n"+
+    				"-----------------------------------------------------";
+    	}
+    	return ret;
+    }
+    
 }

@@ -19,6 +19,9 @@ import org.xmlpull.v1.XmlPullParserException;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.util.Log;
@@ -99,13 +102,16 @@ public class MainActivity extends Activity implements OnClickListener  {
 	 * gets the new values and updates the TextViews
 	 */
 	private void refresh(){
-		Toast.makeText(getApplicationContext(), "The data is being fetched, be patient ;)", Toast.LENGTH_LONG).show();
-		AsyncConnection con = new AsyncConnection(this);
-		con.execute("http://stefanmit.hopto.org/weatherxml.php");
+		ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+		NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+		if (networkInfo != null && networkInfo.isConnected()) {
+			new AsyncConnection(this).execute("http://stefanmit.hopto.org/weatherxml.php");
+			Toast.makeText(getApplicationContext(), "The data is being fetched, be patient ;)", Toast.LENGTH_SHORT).show();
+		}else showStuff("Get access to the internet you moron ;)");
 	} 
 
 
-	public void showStuff(int i) {
-		Toast.makeText(getApplicationContext(), "test"+i, Toast.LENGTH_SHORT).show();
+	public void showStuff(String text) {
+		Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT).show();
 	}
 }
