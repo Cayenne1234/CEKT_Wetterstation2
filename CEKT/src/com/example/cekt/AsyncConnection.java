@@ -80,21 +80,29 @@ public class AsyncConnection extends AsyncTask<String, Void, InputStream> {
 
 	    protected void onPostExecute(InputStream result) {
 	    	try {    
+	    		
+	    		// TEMPERATURE:
 	    		String oldTemp = "";
-	    		for(int i=1; i<=data.getElementsByTagName("temp").getLength();i++){
+	    		int tempLength = data.getElementsByTagName("temp").getLength();
+	    		for(int i=tempLength-2; i>=0; i--){
 	    			oldTemp += doc.getFirstChild().getChildNodes().item(i).getChildNodes().item(0).getTextContent()+"; ";
-	              }
-               ma.tempTxt.setText("Temperature: " + data.getElementsByTagName("temp").item(0).getTextContent() + " °C"+"\n"+"old Values: "+oldTemp);
-               String bar = data.getElementsByTagName("pressure").item(0).getTextContent();
+	             }
+               ma.tempTxt.setText("Temperature: " + data.getElementsByTagName("temp").item(tempLength-1).getTextContent() + " °C"+"\n"+"old Values: "+oldTemp);
+              
+               // DRUCK:
+              int barLength = data.getElementsByTagName("pressure").getLength();
+               String bar = data.getElementsByTagName("pressure").item(barLength-1).getTextContent();
                String oldbar = "";
-               for(int i=1; i<data.getElementsByTagName("pressure").getLength();i++){
+               for(int i=barLength-2; i>=0;i--){
             	   oldbar += doc.getDocumentElement().getElementsByTagName("pressure").item(i).getTextContent()+"; ";
                }
-               String humid = data.getElementsByTagName("humidity").item(0).getTextContent();
+               
+               // FEUCHTIGKEIT:
+               int humLength = data.getElementsByTagName("humidity").getLength();
+               String humid = data.getElementsByTagName("humidity").item(humLength-1).getTextContent();
                String oldHumid = "";
-               for(int i=1; i<data.getElementsByTagName("humidity").getLength();i++){
+               for(int i=humLength-2; i>=0;i--){
             	   oldHumid += doc.getDocumentElement().getElementsByTagName("humidity").item(i).getTextContent()+"; ";
-            	   
                }
                // ma.barTxt.setText("Air-Pressure: " + data.getChildNodes().item(1).getTextContent() + " hPa \n");
                ma.barTxt.setText("Air-Pressure: " + bar + " hPa \n"+"old Values: "+oldbar+
