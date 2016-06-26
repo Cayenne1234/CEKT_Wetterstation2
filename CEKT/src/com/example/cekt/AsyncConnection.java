@@ -85,7 +85,7 @@ public class AsyncConnection extends AsyncTask<String, Void, InputStream> {
 	    		String oldTemp = "";
 	    		int tempLength = data.getElementsByTagName("temp").getLength();
 	    		for(int i=tempLength-2; i>=0; i--){
-	    			oldTemp += doc.getFirstChild().getChildNodes().item(i).getChildNodes().item(0).getTextContent()+"; ";
+	    			oldTemp += data.getElementsByTagName("temp").item(i).getTextContent()+"; ";
 	             }
                ma.tempTxt.setText("Temperature: " + data.getElementsByTagName("temp").item(tempLength-1).getTextContent() + " °C"+"\n"+"old Values: "+oldTemp);
               
